@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbot</title>
+    <!-- Bootstrap Icons CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.0/font/bootstrap-icons.css" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: lightblue;
+        }
+        #header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 10%;
+            padding: 1%;
+            text-align: center;
+            z-index: 999; /* Ensures it stays above other elements */
+        }
+        #chatbot {
+            margin-top: 8%;
+            margin-bottom: 4%;
+            width: 80%;
+            height: 87%;
+            border-radius: 10px;
+            overflow: hidden;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+        }
+
+        #conversation {
+            flex: 1;
+            overflow-y: auto;
+            padding: 5%;
+            font-size: larger;
+        }
+
+        .message {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 10px;
+            text-align: left; /* Align all messages to the left */
+        }
+
+        .message i {
+            margin-right: 10px;
+            font-size: 20px;
+            align-self: center; /* Center the icon vertically */
+        }
+
+        .message-box {
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 10px;
+            word-wrap: break-word; /* Wrap long messages */
+            max-width: 90%; /* Set maximum width for the message box */
+            width: auto; /* Allow the message box to expand dynamically */
+        }
+
+        #message-form {
+            display: flex;
+            align-items: center;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+
+        #message-input {
+            flex: 1;
+            margin-right: 10px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            outline: none;
+            max-width: calc(100% - 80px);
+        }
+        #message-input:focus {
+            border-color: #007bff;
+        }
+
+        #send-button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        #send-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div id="header"><h2>CHATBOT</h2></div>
+    <div id="chatbot">
+        <div id="conversation">
+            <!-- Chat conversation will be rendered here -->
+            <div class="message assistant">
+                <div class="message-box">
+                    {{ initial_message }}
+                </div>
+            </div>
+        </div>
+        <form id="message-form">
+            <input type="text" id="message-input" placeholder="Type your message..." autocomplete="off">
+            <button type="submit">Send</button>
+        </form>
+    </div>
+    <script>
+        const conversation = document.getElementById('conversation');
+        const messageForm = document.getElementById('message-form');
+        const messageInput = document.getElementById('message-input');
+
+        messageForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const userMessage = messageInput.value;
+            const response = await fetch('/chat', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: `message=${encodeURIComponent(userMessage)}`
+            });
+            const data = await response.json();
+            addMessageToDOM('user', " You: " + userMessage);
+            addMessageToDOM('assistant', " Sara: " +  data.message);
+            messageInput.value = '';
+        });
+
+        function addMessageToDOM(role, content) {
+            const messageElement = document.createElement('div');
+            messageElement.classList.add('message', role);
+            
+            // Create and append the icon
+            const icon = document.createElement('i');
+            if (role === 'user') {
+                icon.classList.add('bi', 'bi-person-fill');
+            } else if (role === 'assistant') {
+                icon.classList.add('bi', 'bi-chat-fill');
+            }
+            messageElement.appendChild(icon);
+            
+            // Create and append the message box
+            const messageBox = document.createElement('div');
+            messageBox.classList.add('message-box');
+            messageBox.textContent = content;
+            messageElement.appendChild(messageBox);
+            
+            conversation.appendChild(messageElement);
+            conversation.scrollTop = conversation.scrollHeight;
+        }
+    </script>
+</body>
+</html>
