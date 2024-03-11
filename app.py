@@ -1,39 +1,3 @@
-# greetings = ["hi", "hello", "hey", "good morning", "good afternoon", "good evening", "how you doin"]
-
-# custom_responses = {
-#     "greetings": {"hi": "How you doin'", "hello": "How you doin'", "hey": "How you doin'", "how you doin": "How you doin'"},
-#     "who_are_you": "I am Sara! An AI Chatbot. I make jokes when I am uncomfortable.",
-#     "how_are_you": "I'm hopeless and awkward and desperate for love!",
-#     "misspelled": "That's not even a word!",
-# }
-
-# # Keywords and corresponding statements to append to responses
-# special_keywords = {
-#     "food": "Joey doesn't share food!",
-#     "plan": "I don't even have a plan.",
-#     "advice": "I am not great at advice, can I interest you in a sarcastic comment?",
-#     "motivation": "Don't give up, is that what a dinosaur would do?",
-#     "inspiration": "Don't give up, is that what a dinosaur would do?",
-#     "song": "Smelly cat! Smelly cat! What are they feeding you?",
-#     "songs": "Smelly cat! Smelly cat! What are they feeding you?",
-#     "music": "Smelly cat! Smelly cat! What are they feeding you?",
-#     "love": "We were on a break.",
-#     "relationship": "We were on a break.",
-#     "maths": "He's a transponster",
-#     "statistics": "He's a transponster",
-#     "calculations": "He's a transponster",
-#     "life": "Welcome to the real world! It sucks. You're gonna love it!",
-#     "clothes": "Could I be wearing any more clothes?",
-#     "cloth": "Could I be wearing any more clothes?",
-#     "dress": "Could I be wearing any more clothes?",
-#     "dresses": "Could I be wearing any more clothes?",
-#     "self-defense": "Unagi",
-#     "know": "They don't know that we know they know",
-#     "no": "Noooooooooo!",
-#     "clean": "Not just clean, 'Monica Clean'.",
-    
-# }
-
 from flask import Flask, render_template, request, jsonify
 import openai
 from openai import OpenAI
