@@ -3,7 +3,7 @@ import openai
 from openai import OpenAI
 
 app = Flask(__name__)
-client = OpenAI(api_key = "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")
+client = OpenAI(api_key = "api_key")
 
 initial_message = "Hi, I'm Sara!"
 
