@@ -25,3 +25,9 @@ With its user-friendly web interface, my chatbot provides a seamless and intuiti
 - **HTML:** Used for creating the user interface and structure of the chatbot.
 - **Python Flask:** Utilized as the web framework for handling HTTP requests and responses.
 - **OpenAI API:** Integrated to provide AI-powered responses and interactions within the chatbot.
+
+<br>
+
+Attached is the demo video showcasing Sara in action:
+
+https://www.linkedin.com/posts/shreshtapadala_ai-artificialintelligence-chatbot-activity-7173330018876555264-xTCf?utm_source=share&utm_medium=member_desktop
